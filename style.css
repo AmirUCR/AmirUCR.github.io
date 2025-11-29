@@ -303,9 +303,9 @@ i {
   outline: 2px solid #fff;
   outline-offset: 2px;
 }
-.nav-wrapper .nav-unit:hover {
-  box-shadow: 0 0 20px rgba(95, 0, 189, 0.5);
-}
+//.nav-wrapper .nav-unit:hover {
+//  box-shadow: 0 0 20px rgba(95, 0, 189, 0.5);
+//}
 .nav-wrapper {
   /* Last child margin fix */
 }
