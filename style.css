@@ -1,0 +1,547 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Raleway");
+/* ---------- Tokens ---------- */
+/* ~25px */
+/* ---------- Resets / base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  list-style: none;
+  text-decoration: none;
+}
+
+::selection {
+  background: #5f489f;
+}
+
+::-moz-selection {
+  background: #5f489f;
+}
+
+p {
+  color: #131313;
+}
+
+i {
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+}
+
+.hover-image {
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+
+.hover-image.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.hover-trigger:hover {
+  cursor: none;
+}
+
+/* ---------- Background / hero ---------- */
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ---------- Intro ---------- */
+.intro-wrapper {
+  display: block;
+  margin: auto;
+  padding: 34px 0;
+  width: 100%;
+  height: 25%;
+}
+
+.intro {
+  position: relative;
+  top: 200%;
+  transition: top 400ms cubic-bezier(0.48, 0.13, 0.37, 0.97);
+}
+.intro.effect {
+  top: 25%;
+  color: #5e17eb;
+}
+
+.greeting {
+  font-family: "Raleway", sans-serif;
+  font-size: 40px;
+  text-transform: uppercase;
+  display: inline-block;
+  letter-spacing: 11px;
+  margin-right: -11px;
+  font-weight: 300;
+  line-height: 1;
+  padding: 0 20px;
+  color: #131313;
+}
+.greeting .accent {
+  font-weight: bold;
+  color: #5e17eb;
+}
+.greeting::after {
+  content: "";
+  position: relative;
+  display: block;
+  height: 0.2vh;
+  width: 3.3em;
+  bottom: -6px;
+  left: 0;
+  background: #5e17eb;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms cubic-bezier(0.48, 0.13, 0.37, 0.97);
+}
+.greeting.effect::after {
+  transform: scaleX(1);
+  color: #5e17eb;
+}
+
+.cursor {
+  position: absolute;
+  bottom: 18%;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ---------- Work grid ---------- */
+.work-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  text-transform: uppercase;
+}
+.work-wrapper .work-header {
+  text-align: center;
+  max-width: 620px;
+  box-sizing: border-box;
+  height: 67.5px;
+  width: 100%;
+  color: #5e17eb;
+  font-size: 1.5625rem;
+  letter-spacing: 9px;
+}
+.work-wrapper [class^=work-unit-] {
+  position: relative;
+  display: block;
+  float: left;
+  height: 200px;
+  width: 279px;
+  cursor: pointer;
+  overflow: hidden;
+  perspective: 300px;
+}
+.work-wrapper .work-unit-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(100, 100, 100, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateX(90deg);
+  transform-origin: center;
+  opacity: 0;
+  transition: all 0.3s ease-out;
+}
+.work-wrapper .work-unit-overlay strong {
+  font-family: "Raleway", sans-serif;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: 300;
+  line-height: 1.2;
+  text-align: center;
+  padding: 0 10px;
+  overflow-wrap: anywhere;
+}
+.work-wrapper [class^=work-unit-]:hover .work-unit-overlay,
+.work-wrapper [class^=work-unit-]:focus .work-unit-overlay {
+  user-select: none;
+  transform: rotateX(0deg);
+  opacity: 1;
+}
+.work-wrapper .work-unit-1 {
+  background: url("https://github.com/AmirUCR/img/blob/master/website_allegro.png?raw=true") center/cover no-repeat;
+}
+.work-wrapper .work-unit-2 {
+  background: url("https://github.com/AmirUCR/img/blob/master/website_sirius.png?raw=true") center/cover no-repeat;
+}
+.work-wrapper .work-unit-3 {
+  background: url("https://github.com/AmirUCR/img/blob/master/website_mst.png?raw=true") center/cover no-repeat;
+}
+.work-wrapper .work-unit-4 {
+  background: url("https://github.com/AmirUCR/img/blob/master/website_ml.png?raw=true") center/cover no-repeat;
+}
+
+/* ---------- Ripple ---------- */
+.ink {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  background: #fff;
+  border-radius: 50%;
+  transform: scale(0);
+}
+.ink.animate {
+  animation: ripple 0.65s linear;
+}
+
+@keyframes ripple {
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+.disable-clicks {
+  pointer-events: none;
+  cursor: default;
+}
+
+.nav-wrapper {
+  display: block;
+  max-width: 640px;
+  margin: auto;
+  padding: 0 1.25rem; /* 20px */
+  height: 72%;
+}
+.nav-wrapper .nav-unit {
+  position: relative;
+  display: block;
+  height: 100px;
+  text-align: left;
+  margin-bottom: 3.125rem;
+  max-width: 0;
+  opacity: 1;
+  overflow: hidden;
+  will-change: max-width, opacity, height;
+  transition: max-width 400ms cubic-bezier(0.48, 0.13, 0.37, 0.97), opacity 400ms cubic-bezier(0.48, 0.13, 0.37, 0.97), height 400ms cubic-bezier(0.48, 0.13, 0.37, 0.97);
+}
+.nav-wrapper .nav-unit.effect {
+  max-width: 620px;
+}
+.nav-wrapper .nav-unit .about-overlay,
+.nav-wrapper .nav-unit .work-overlay,
+.nav-wrapper .nav-unit .contact-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start; /* Aligns label to top */
+  justify-content: center; /* Centers label horizontally */
+  background-color: #5e17eb;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.5625rem;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: clip-path 400ms ease-out;
+  clip-path: inset(0 0 0 0);
+}
+.nav-wrapper .nav-unit .about-overlay.curtain-close,
+.nav-wrapper .nav-unit .work-overlay.curtain-close,
+.nav-wrapper .nav-unit .contact-overlay.curtain-close {
+  clip-path: inset(0 100% 0 0); /* wipe to the right */
+}
+.nav-wrapper .nav-unit .nav-label {
+  /* Force this container to match the collapsed unit height */
+  height: 100px;
+  width: 100%;
+  /* Center the text strictly within this fixed box */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Typography */
+  color: #e9e9e9;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.5625rem;
+  letter-spacing: 0.4em; /* Relative unit scales better than 10px */
+  text-transform: uppercase;
+  user-select: none;
+  white-space: nowrap; /* Prevents wrapping on small screens */
+}
+.nav-wrapper .nav-unit {
+  /* Focus styles for accessibility (assuming parent is focusable) */
+}
+.nav-wrapper .nav-unit:focus-visible .about-overlay {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.nav-wrapper .nav-unit:hover {
+  box-shadow: 0 0 20px rgba(95, 0, 189, 0.5);
+}
+.nav-wrapper {
+  /* Last child margin fix */
+}
+.nav-wrapper .nav-unit:last-child {
+  margin-bottom: 0;
+}
+.nav-wrapper {
+  /* --- Expanded States --- */
+}
+.nav-wrapper .about-nav.enlarged {
+  height: 388px;
+}
+.nav-wrapper .work-nav.enlarged {
+  height: 500px;
+}
+.nav-wrapper .contact-nav.enlarged {
+  height: 208px;
+}
+.nav-wrapper .about-nav,
+.nav-wrapper .work-nav,
+.nav-wrapper .contact-nav {
+  transition: 400ms cubic-bezier(0.48, 0.13, 0.37, 0.97);
+  top: 0;
+}
+.nav-wrapper .about-nav.moveUp,
+.nav-wrapper .work-nav.moveUp,
+.nav-wrapper .contact-nav.moveUp {
+  transition: 400ms cubic-bezier(0.48, 0.13, 0.37, 0.97);
+}
+.nav-wrapper .work-nav.moveUp {
+  top: -150px;
+}
+.nav-wrapper .contact-nav.moveUp {
+  top: -300px;
+}
+.nav-wrapper .nav-unit.no-display {
+  visibility: hidden;
+}
+.nav-wrapper .nav-unit.shrink {
+  max-width: 0;
+  opacity: 0;
+}
+
+/* ---------- Content wrappers ---------- */
+.about-wrapper,
+.work-wrapper,
+.contact-wrapper {
+  text-align: justify;
+  border-left: 2px solid #5e17eb;
+  max-width: 600px;
+  padding: 0 20px;
+  font-size: 18px;
+  position: relative;
+  z-index: -1;
+}
+.about-wrapper p,
+.work-wrapper p,
+.contact-wrapper p {
+  font-family: "Raleway", sans-serif;
+  line-height: 2;
+}
+.about-wrapper .about-header,
+.work-wrapper .about-header,
+.contact-wrapper .about-header {
+  text-align: center;
+  max-width: 620px;
+  height: 67.5px;
+  color: #5e17eb;
+  text-transform: uppercase;
+  font-size: 25px;
+  letter-spacing: 9px;
+}
+
+.resume {
+  cursor: pointer;
+}
+
+/* ---------- Contact ---------- */
+.contact-wrapper {
+  display: block;
+  text-align: left;
+}
+.contact-wrapper .contact-group label {
+  width: 50%;
+  float: left;
+  box-sizing: border-box;
+}
+.contact-wrapper .contact-group label:nth-child(1) {
+  padding: 0 20px 0 0;
+}
+.contact-wrapper .contact-group label:nth-child(2) {
+  padding: 0 0 0 20px;
+}
+.contact-wrapper .contact-group input {
+  border-bottom: 2px solid #5e17eb;
+}
+.contact-wrapper .contact-header {
+  text-align: center;
+  max-width: 620px;
+  height: 67.5px;
+  color: #5e17eb;
+  text-transform: uppercase;
+  font-size: 25px;
+  letter-spacing: 9px;
+}
+.contact-wrapper form label {
+  display: block;
+  margin-bottom: 20px;
+}
+.contact-wrapper textarea {
+  height: 10em;
+  border: 2px solid #5e17eb;
+  resize: none;
+}
+.contact-wrapper .submit-wrap input[type=submit] {
+  width: 100px;
+  color: #f2f2f2;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 2px solid #5e17eb;
+  cursor: pointer;
+}
+
+/* ---------- Form fields ---------- */
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 22px;
+  color: #5f489f;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 0;
+}
+
+.eks {
+  user-select: none;
+  text-align: right;
+  height: 32.5px;
+  width: 100%;
+  color: #5e17eb;
+}
+.eks span {
+  font-size: 30px;
+  cursor: pointer;
+}
+.eks span:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  display: block;
+  height: 3%;
+  padding: 0 20px;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+.footer p {
+  color: #a1a1a1;
+}
+.footer a {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #a1a1a1;
+}
+.footer a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 650px) {
+  .greeting {
+    font-size: 35px;
+    margin-right: 0;
+  }
+  .greeting::after {
+    width: 100%;
+  }
+  .nav-wrapper .nav-unit {
+    margin-bottom: 40px;
+  }
+  .nav-wrapper .nav-unit:last-child {
+    margin-bottom: 40px;
+  }
+  .nav-wrapper .work-nav.enlarged {
+    height: 900px;
+  }
+  .nav-wrapper .contact-nav.enlarged {
+    height: 208px;
+  }
+  .nav-wrapper [class*=-span] {
+    left: 20px;
+  }
+  .about-wrapper {
+    font-size: 16px;
+  }
+  .about-wrapper .about-header,
+  .work-wrapper .about-header,
+  .contact-wrapper .about-header {
+    height: 45px;
+  }
+  .contact-wrapper .contact-group label {
+    float: none;
+    width: 100%;
+    padding: 0 !important;
+  }
+  .work-wrapper [class^=work-unit-] {
+    width: 293px;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 320px) {
+  .work-wrapper {
+    max-width: 300px;
+  }
+  .greeting {
+    font-size: 26px;
+  }
+  div[class*=-header] {
+    text-align: left !important;
+  }
+  .work-wrapper [class^=work-unit-] {
+    width: 238px;
+  }
+  .nav-wrapper .contact-nav.enlarged {
+    height: 208px;
+  }
+}
+/* ---------- Motion safety ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
